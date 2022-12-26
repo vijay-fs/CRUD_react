@@ -22,6 +22,22 @@ function CRUD() {
   const handleedit = (_id) => {
     setUpdateState(_id);
   };
+  async function handleDelete(id) {
+    // async function deleteData() {
+
+    const requestOptions = {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    };
+    const url = `http://localhost:9000/aliens/${id}`;
+    const response = await fetch(url, requestOptions);
+    const data = await response.json();
+    console.log(data, "data deleted");
+    // }
+    const newlist = data.filter((li) => li.id !== id);
+    setLists(newlist);
+    // console.log(id);
+  }
   return (
     <div>
       <AddList setLists={setLists} />
@@ -46,7 +62,12 @@ function CRUD() {
                     <td>{list.tech}</td>
                     <td>
                       <button onClick={() => handleedit(list._id)}>EDIT</button>
-                      <button>DELETE</button>
+                      <button
+                        type="button"
+                        onClick={() => handleDelete(list._id)}
+                      >
+                        DELETE
+                      </button>
                     </td>
                   </tr>
                 )
