@@ -7,8 +7,6 @@ export default function AddList({ setLists }) {
   const [tech, setTech] = useState("");
 
   const onSubmitHandler = (event) => {
-    console.log(name, "submit");
-    console.log(tech, "submit");
     axios
       .post("http://localhost:9000/aliens", {
         name: name,

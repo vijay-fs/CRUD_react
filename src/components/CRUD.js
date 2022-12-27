@@ -18,13 +18,11 @@ function CRUD() {
   };
   useEffect(() => {
     fetchalien();
-  }, []);
+  }, [lists]);
   const handleedit = (_id) => {
     setUpdateState(_id);
   };
   async function handleDelete(id) {
-    // async function deleteData() {
-
     const requestOptions = {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
@@ -33,10 +31,8 @@ function CRUD() {
     const response = await fetch(url, requestOptions);
     const data = await response.json();
     console.log(data, "data deleted");
-    // }
     const newlist = data.filter((li) => li.id !== id);
     setLists(newlist);
-    // console.log(id);
   }
   return (
     <div>
@@ -54,7 +50,7 @@ function CRUD() {
             <tbody>
               {lists.map((list) =>
                 updatestate === list._id ? (
-                  <EditData list={list} />
+                  <EditData key={list._id} list={list} />
                 ) : (
                   <tr key={list._id}>
                     <td>{list._id}</td>

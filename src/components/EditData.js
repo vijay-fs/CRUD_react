@@ -4,11 +4,10 @@ export default function EditData(list) {
   const [name, setName] = useState("");
   const [tech, setTech] = useState("");
   const [li, setLi] = useState("");
-  console.log(name);
-  console.log(tech);
+
   useEffect(() => {
     setLi(list.list._id);
-  }, [list.list._id]);
+  }, [list.list._id, list.list.name, list.list.tech]);
   async function updatePost() {
     const requestOptions = {
       method: "PUT",
@@ -27,21 +26,21 @@ export default function EditData(list) {
     setFunction(event.target.value);
   };
   return (
-    <tr key={list._id}>
+    <tr>
       <td></td>
-      <td>
+      <td key={list.name}>
         <input
           type="text"
-          name="name"
-          value={list.name}
+          className="form-control"
+          value={name}
           onChange={(e) => inputChangeHandler(setName, e)}
         />
       </td>
-      <td>
+      <td key={list.tech}>
         <input
           type="text"
-          name="tech"
-          value={list.tech}
+          value={tech}
+          className="form-control"
           onChange={(e) => inputChangeHandler(setTech, e)}
         />
       </td>
